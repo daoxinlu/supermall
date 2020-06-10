@@ -1,0 +1,15 @@
+@import './normalize.css';
+
+:root{
+    --color-text:#666;
+    --color-high-text:#ff5777;
+    --line-height:1.5;
+    --color-background:#fff;
+    --color-tint:#ff8198;
+}
+
+body{
+    margin:0;
+    padding:0;
+    background-color: black;
+}
