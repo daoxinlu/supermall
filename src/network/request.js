@@ -5,9 +5,9 @@ export function request(config){
     // axios.defaults.baseURL = 'http://123.207.32.32:8000/'
     // axios.defaults.timeout = 5000
     // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencode'
-    const instance = axios.create()
+    const instance = axios.create({baseURL:'http://123.207.32.32:8000/api/m3/'})
     instance.interceptors.request.use(config=>{
-        console.log('进入拦截器')
+        // console.log('进入拦截器')
         //在这里处理请求参数，过滤掉不符合的参数等，验证token
         return config;
     },err=>{
@@ -15,7 +15,7 @@ export function request(config){
         return err
     })
     instance.interceptors.response.use(res=>{
-        console.log('截取响应数据');
+        // console.log('截取响应数据');
         return res
     },err=>{
         console.log('截取响应失败')
