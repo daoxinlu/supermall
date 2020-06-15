@@ -14,8 +14,8 @@
 </template>
 
 <script>
-export default {
-	name: "Swiper",
+	export default {
+		name: "Swiper",
     props: {
       interval: {
 		    type: Number,
@@ -50,7 +50,7 @@ export default {
 
         // 2.开启定时器
         this.startTimer();
-      }, 100)
+      }, 1000)            //为什么这个不能是100ms
     },
     methods: {
 		  /**
@@ -119,16 +119,10 @@ export default {
 		  handleDom: function () {
         // 1.获取要操作的元素
         let swiperEl = document.querySelector('.swiper');
-        let slidesEls
-        try{
-            slidesEls = swiperEl.getElementsByClassName('slide');
-            // 2.保存个数
-            this.slideCount = slidesEls.length;
-        }catch(e){
-            console.log('数据还未接受'+e)
-        }
-        
-        
+        let slidesEls = swiperEl.getElementsByClassName('slide');
+
+        // 2.保存个数
+        this.slideCount = slidesEls.length;
 
         // 3.如果大于1个, 那么在前后分别添加一个slide
         if (this.slideCount > 1) {

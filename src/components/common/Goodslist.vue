@@ -1,14 +1,18 @@
 <template>
     <div class="goods-list">
-        <ul class="goods-list-pop goods-list-item" >
-            <li v-for="(item,index) in pops.list[0]" :key="item.iid+index+1" v-show="show[0]">
+        <goods-list-item v-show="show[0]" :items="pops"></goods-list-item>
+        <goods-list-item v-show="show[1]" :items="news"></goods-list-item>
+        <goods-list-item v-show="show[2]" :items="sells"></goods-list-item>
+        <!-- <ul class="goods-list-pop goods-list-item" >
+            <li v-for="(item,index) in pops.list[0]" :key="item.iid+index+1" v-show="show[0]" >
                 <a :href="item.link">
                     <img :src="item.show.img" alt="" :title="item.title">
                     <div class="goods-title-words">{{item.title}}</div>
                     <div class="goods-item-price">
-                        <span>￥{{item.price}}</span> 原价 <span>{{item.orgPrice}}</span>
+                        <span>￥{{item.price}}</span> <span>☆★{{item.cfav}} </span><span class="primary-price">原价：{{item.orgPrice}}</span>
                     </div>
                 </a>
+                
             </li>
         </ul>
         <ul class="goods-list-new goods-list-item" >
@@ -17,7 +21,7 @@
                     <img :src="item.show.img" alt="" :title="item.title">
                     <div class="goods-title-words">{{item.title}}</div>
                     <div class="goods-item-price">
-                        <span>￥{{item.price}}</span> 原价 <span>{{item.orgPrice}}</span>
+                        <span>￥{{item.price}}</span> <span>☆★{{item.cfav}} </span><span class="primary-price">原价：{{item.orgPrice}}</span>
                     </div>
                 </a>
             </li>
@@ -28,15 +32,16 @@
                     <img :src="item.show.img" alt="" :title="item.title">
                     <div class="goods-title-words">{{item.title}}</div>
                     <div class="goods-item-price">
-                        <span>￥{{item.price}}</span> 原价 <span>{{item.orgPrice}}</span>
+                        <span>￥{{item.price}}</span> <span>☆★{{item.cfav}} </span><span class="primary-price">原价：{{item.orgPrice}}</span>
                     </div>
                 </a>
             </li>
-        </ul>
-    </div>
+        </ul>-->
+    </div> 
 </template>
 
 <script>
+
 export default {
     name:'GoodsList',
     props:{
@@ -48,9 +53,12 @@ export default {
             default(){return [true,false,false]}
         }
     },
-    // mounted(){
-    //     setTimeout(()=>{console.log(this.pops)},100)
-    // },
+    components:{
+        GoodsListItem :()=>import ('./Goodslistitem')
+    },
+    mounted(){
+        // setTimeout(()=>{console.log(this.pops)},100)
+    },
     // updated(){
     //     setTimeout(()=>{console.log(this.pops)},100)
     // }
@@ -59,46 +67,5 @@ export default {
 </script>
 
 <style scoped>
-    .goods-list-item{
-        
-        display:flex;
-        flex-wrap: wrap;
-        justify-content:space-evenly;
-        width:100%;
-        padding:0;
-    }
-    .goods-list-item>li{
-        list-style-type: none;
-        width:40%;
-        margin-top:20px;
-        
-    }
-    .goods-list-item img{
-        width:100%;
-        height:60%;
-    }
-    .goods-list-item div{
-        margin-top:12px;
-        
-    }
-    .goods-item-price{
-        
-        font-size:12px;
-        
-    }
-    .goods-item-price>span:nth-of-type(1){
-        color:red;
-        font-size:14px;
-    }
-    .goods-title-words{
-        line-height:20px;   
-        overflow:hidden;
-        -webkit-line-clamp: 3;
-        display:-webkit-box;
-        -webkit-box-orient: vertical;
-        text-overflow:ellipsis;
-        font-size:14px;
-        white-space: pre-wrap;
-        
-    }
+    
 </style>

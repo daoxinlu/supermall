@@ -1,11 +1,11 @@
 <template>
-  <div id="home">
+  <div id="home" @touchmove="debounce" @mousewheel="debounce"> 
     <top-bar class='home-top'><div slot="center">首页</div></top-bar>
     <home-swiper :banners="banners"></home-swiper>
     <home-recommend :recommends="recommends"></home-recommend>
     <week-hot></week-hot>
     <content-bar :titles="category" class="content-bar" :show="goodsShow"  @changeShow="changeShow"></content-bar>
-    <goods-list :pops="this.goods.pop" :sells="this.goods.sell" :news="this.goods.new" :show="goodsShow"></goods-list>
+    <goods-list :pops="this.goods.pop" :sells="this.goods.sell" :news="this.goods.new" :show="goodsShow" id="goods-list"></goods-list>
     
   </div>
 </template>
@@ -40,21 +40,32 @@ export default {
         banners:[],
         recommends:[],
         goods:{
-          pop:{page:1,list:[]},
-          new:{page:1,list:[]},
-          sell:{page:1,list:[]},
+          pop:{page:1,list:[],name:'pop'},
+          new:{page:1,list:[],name:'new'},
+          sell:{page:1,list:[],name:'sell'},
         },
         goodsShow:new Array(3).fill(false),
-        category:['热门','流行','新款']
+        category:['流行','新款','热销'],
+
+        goodsHeight:0,
       }
     },
     created(){
+      
       this.multidata();
       this.getSellGoods();
       this.getNewGoods();
       this.getPopGoods();
       this.goodsShow[0] = true;
     },
+    mounted(){
+      var goodslist = document.getElementById('goods-list')
+      setTimeout(()=>{
+        var height = parseInt(getComputedStyle(goodslist).height)
+        console.log(height);
+        this.goodsHeight = height
+      },1000)
+      },
     methods:{
       multidata(){
         Multidata(5000).then(res=>{
@@ -66,23 +77,26 @@ export default {
         }).catch(err=>{console.log(err)})
       },
       getSellGoods(){
-        Getgoods('sell',1,10000).then(res=>{
+        Getgoods('sell',this.goods.sell.page,10000).then(res=>{
           // console.log(res.data.data.list)
+          this.goods.sell.page++
           this.goods.sell.list.push(res.data.data.list)
           // console.log(this.goods.pop.list)        
         }).catch(err=>{console.log(err)})
       },
       getNewGoods(){
-        Getgoods('new',1,10000).then(res=>{
+        Getgoods('new',this.goods.new.page,10000).then(res=>{
           // console.log('new')
           // console.log(res.data)
+          this.goods.new.page++
           this.goods.new.list.push(res.data.data.list)
         }).catch(err=>{console.log(err)})
       },
       getPopGoods(){
-        Getgoods('pop',1,10000).then(res=>{
+        Getgoods('pop',this.goods.pop.page,10000).then(res=>{
           // console.log('sell')
           // console.log(res.data)
+          this.goods.pop.page++
           this.goods.pop.list.push(res.data.data.list)   
         }).catch(err=>{console.log(err)})
       },
@@ -91,6 +105,49 @@ export default {
         this.goodsShow = [false,false,false]
         this.goodsShow[index] = true
         
+      },
+      
+      getNewData(){
+        var show = this.goodsShow;
+        var index;
+        for(var i=0;i<show.length;i++){
+          if(show[i]){
+            index = i;
+            break;
+          }
+        }
+        var keys = Object.keys(this.goods)
+        if(this.goods[keys[index]].page<=3){
+          var keys = Object.keys(this.goods)
+          Getgoods(keys[index],this.goods[keys[index]].page,10000).then(res=>{
+            // console.log(res.data.data.list)
+            this.goods[keys[index]].page++
+            this.goods[keys[index]].list[0].push(...res.data.data.list)
+            // this.$nextTick(()=>console.log(1))
+                  
+          }).catch(err=>{console.log(err)})
+        }else{
+          alert('已加载完全部商品')
+        }
+        
+      },
+      debounce(e){
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(()=>{
+          
+          if(parseInt(getComputedStyle(document.documentElement).height)-window.innerHeight-window.scrollY<20){
+            console.log('到底了');
+            this.getNewData();
+          }
+        },1000)
+        
+      },
+      
+    },
+    watch:{
+      goods(newV){
+        console.log(this.goods.sell.list)
+        return newV;
       }
     }
 }

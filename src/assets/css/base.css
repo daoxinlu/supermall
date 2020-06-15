@@ -11,6 +11,8 @@
 body{
     margin:0;
     padding:0;
+    over-flow: auto;     /* winphone8和android4+ */
+    -webkit-overflow-scrolling: touch;    /* ios5+ */
 }
 a{
     text-decoration: none;
