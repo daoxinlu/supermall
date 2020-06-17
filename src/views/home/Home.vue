@@ -1,7 +1,7 @@
 <template>
   <div id="home" @touchmove="debounce" @mousewheel="debounce"> 
     <top-bar class='home-top'><div slot="center">首页</div></top-bar>
-    <home-swiper :banners="banners"></home-swiper>
+    <home-swiper :banners="banners" class="home-swiper"></home-swiper>
     <home-recommend :recommends="recommends"></home-recommend>
     <week-hot></week-hot>
     <content-bar :titles="category" class="content-bar" :show="goodsShow"  @changeShow="changeShow"></content-bar>
@@ -46,8 +46,9 @@ export default {
         },
         goodsShow:new Array(3).fill(false),
         category:['流行','新款','热销'],
-
+        siteY:'',         //只有通过实践监听器才能够在切换组件的情况下保存
         goodsHeight:0,
+        aa:''
       }
     },
     created(){
@@ -59,13 +60,31 @@ export default {
       this.goodsShow[0] = true;
     },
     mounted(){
-      var goodslist = document.getElementById('goods-list')
-      setTimeout(()=>{
-        var height = parseInt(getComputedStyle(goodslist).height)
-        console.log(height);
-        this.goodsHeight = height
-      },1000)
-      },
+      console.log('home')
+      window.scrollTo(0,this.siteY)
+      // var goodslist = document.getElementById('goods-list')
+      // setTimeout(()=>{
+      //   var height = parseInt(getComputedStyle(goodslist).height)
+      //   console.log(height);
+      //   this.goodsHeight = height
+      // },1000)
+      window.addEventListener('scroll', this.handleScroll, true)
+    },
+    activated(){
+      // console.log('回来'+this.siteY)
+      window.scrollTo(0,this.siteY)
+      // console.log(this.$refs.Home)
+      window.addEventListener('scroll', this.handleScroll, true)
+      
+      
+
+    },
+    deactivated(){
+      
+      window.removeEventListener('scroll', this.handleScroll, true)
+      
+        
+    },
     methods:{
       multidata(){
         Multidata(5000).then(res=>{
@@ -135,13 +154,19 @@ export default {
         clearTimeout(this.timeout)
         this.timeout = setTimeout(()=>{
           
-          if(parseInt(getComputedStyle(document.documentElement).height)-window.innerHeight-window.scrollY<20){
+          if(parseInt(getComputedStyle(document.documentElement).height)-window.innerHeight-window.scrollY<20&&-1!=this.$route.path.indexOf('home')){
             console.log('到底了');
             this.getNewData();
           }
         },1000)
         
       },
+      handleScroll(){
+        // this.$nextTick(()=>{
+        this.siteY = document.body.scrollTop || document.documentElement.scrollTop || window.pageXOffset
+        
+	      // })
+      }
       
     },
     watch:{
@@ -149,7 +174,8 @@ export default {
         console.log(this.goods.sell.list)
         return newV;
       }
-    }
+    },
+
 }
 </script>
 

@@ -19,3 +19,6 @@ a{
     font-size:12px;
     color:black;
 }
+li{
+    list-style-type: none;
+}

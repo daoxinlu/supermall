@@ -3,7 +3,7 @@
         <goods-list-item v-show="show[0]" :items="pops"></goods-list-item>
         <goods-list-item v-show="show[1]" :items="news"></goods-list-item>
         <goods-list-item v-show="show[2]" :items="sells"></goods-list-item>
-        <!-- <ul class="goods-list-pop goods-list-item" >
+        <!-- <ul class="goods-list-pop goods-list-item" > 把这部分抽成组件
             <li v-for="(item,index) in pops.list[0]" :key="item.iid+index+1" v-show="show[0]" >
                 <a :href="item.link">
                     <img :src="item.show.img" alt="" :title="item.title">

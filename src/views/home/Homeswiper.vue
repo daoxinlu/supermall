@@ -1,5 +1,5 @@
 <template>
-  <swiper>
+  <swiper class="home-swiper">
       <swiper-item v-for="(item,index) in banners" :key="index">
           <a :href="item.link">
               <img :src="item.image" alt=""/>
@@ -10,6 +10,7 @@
 
 <script>
 import {Swiper,SwiperItem} from 'components/common/swiper/index.js'
+import BScroll from 'better-scroll'
 export default {
     name:'HomeSwiper',
     props:{
@@ -24,10 +25,17 @@ export default {
         Swiper,
         SwiperItem,
     },
+    mounted(){
+        // new BScroll('.home-swiper',{
+        //     momentum:true
+        // })
+    }
     
 }
 </script>
 
 <style>
-
+    .home-swiper{
+        width:100%;
+    }
 </style>

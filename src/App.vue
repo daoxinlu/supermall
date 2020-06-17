@@ -1,23 +1,41 @@
 <template>
   <div id="app">
+    <keep-alive exclude="Detail">
+      <router-view></router-view>
+    </keep-alive>
     
-    <router-view></router-view>
     <tab-bar></tab-bar>
+    <to-top @click.native="backToTop"></to-top>
+    <my-tips></my-tips>
   </div>
 </template>
 
 <script>
 
 import TabBar from 'components/content/Tabbar.vue'
+import ToTop from 'components/common/Totop'
+import MyTips from 'components/common/Mytips'
 export default {
   name: 'App',
   components: {
     TabBar,
-    
-  }
+    ToTop,
+    MyTips,
+  },
+  data(){
+    return {
+      siteY:0
+    }
+  },
+  methods:{
+    backToTop(){
+      window.scrollTo(0,0)
+    }
+  },
+  
 }
 </script>
 
 <style>
-@import 'assets/css/base.css';
+  @import 'assets/css/base.css';
 </style>
