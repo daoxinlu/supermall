@@ -29,9 +29,17 @@ export default {
   },
   methods:{
     backToTop(){
-      window.scrollTo(0,0)
+      window.scrollTo({
+        top:0,
+        behavior:'smooth'
+      })
     }
   },
+  created(){
+    // console.log(localStorage.getItem('cartList'))
+    var payload = JSON.parse(localStorage.getItem('cartList'))
+    this.$store.commit('init',payload)
+  }
   
 }
 </script>

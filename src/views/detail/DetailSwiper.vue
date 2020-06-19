@@ -1,5 +1,5 @@
 <template>
-    <mt-swipe class="mint-swiper"  :speed=800>
+    <mt-swipe class="mint-swiper" id="top-swiper" :speed=800>
         <mt-swipe-item v-for="(item) in images"  :key="item">
             <img :src="item" class="image-swiper" alt="">
         </mt-swipe-item>

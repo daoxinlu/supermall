@@ -60,7 +60,7 @@ export default {
       this.goodsShow[0] = true;
     },
     mounted(){
-      console.log('home')
+      
       window.scrollTo(0,this.siteY)
       // var goodslist = document.getElementById('goods-list')
       // setTimeout(()=>{
@@ -169,8 +169,8 @@ export default {
       }
       
     },
-    watch:{
-      goods(newV){
+    watch:{     
+      goods(newV){    //上拉加载更多需更新数据
         console.log(this.goods.sell.list)
         return newV;
       }

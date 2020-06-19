@@ -1,8 +1,10 @@
 <template>
   <top-bar class="detail-top">
-        <div slot="left" @click="back"><</div>
+        <div slot="left" @click="back"><i class="iconfont">&#xe608;</i></div>
         <div slot="center" class="detail-title">
-            <div class="detail-title-item" v-for="(item,index) in titles" @click="showIndex(index)" :class="{active:currentIndex==index}" :key="item">{{item}}</div>
+            <div class="detail-title-item" v-for="(item,index) in titles" @click="showIndex(index)"  :key="item">
+                <a :href="anchors[index]" :class="{active:currentIndex==index}">{{item}}</a>
+            </div>
         </div>
         <div slot="right"></div>
     </top-bar>
@@ -20,6 +22,7 @@ export default {
     data(){
         return {
             titles:['商品','参数','评论','推荐'],
+            anchors:['#'],
             iid:'',
             currentIndex:0,
             topImages:[],

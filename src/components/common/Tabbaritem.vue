@@ -45,7 +45,7 @@ export default {
         height:49px;
         background-color:#f6f6f6;
         font-size:12px;
-        margin-top:3px;
+        margin-top:6px;
     }
     /* .tab-bar-item>div>img{
         height:24px;

@@ -1,6 +1,6 @@
 <template>
     <div class="tips">
-        <div id="tips"   class="disvisible"></div>
+        <div id="tips" class="disvisible"></div>
     </div>
 </template>
 
@@ -15,7 +15,8 @@ export default {
         position:fixed;
         background: green;
         top:40%;
-        left:42%;
+        left:50%;
+        transform: translateX(-50%);
         transition:all 1.0s ease-in-out
     }
     #tips:after{

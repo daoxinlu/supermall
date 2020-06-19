@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store'
+
 import { Swipe, SwipeItem } from 'mint-ui';
 
 Vue.component(Swipe.name, Swipe);
@@ -12,7 +14,7 @@ import 'mint-ui/lib/style.css'
 
 new Vue({
   router,
-  
+  store,
   render: h => h(App),
 }).$mount('#app')
 

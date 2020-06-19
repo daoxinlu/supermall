@@ -1,6 +1,8 @@
 <template>
-  <div id="tab-bar">
+  
+  <div id="tab-bar" v-if="!shopbar">    
       <tab-bar-item path='/home' curColor='green'>
+      <!-- 需要使用watch属性监听route变化 -->
         <img src="~assets/img/tabbar/home.svg" alt="" slot="item-icon">
         <img src="~assets/img/tabbar/home_active.svg" alt="" slot="item-icon-active">
         <div slot="item-text">首页</div>
@@ -30,6 +32,26 @@ export default {
     name:'TabBar',
     components:{
         TabBarItem,
+    },
+    data(){
+      return{
+        shopbar:false,
+      }
+    },
+    created(){
+      
+      this.shopbar = this.$route.path.indexOf('detail')!=-1
+    },
+    watch:{
+      '$route':function(){
+       
+        if(this.$route.path.indexOf('detail')==-1){
+          this.shopbar = false;
+        }else{
+          this.shopbar = true;
+        }
+      }
+
     }
 }
 </script>
@@ -41,7 +63,8 @@ export default {
         bottom:0;
         left:0;
         right:0;
-        box-shadow:0 -1px 1px 1px rgba(0,0,0,0.1)
+        box-shadow:0 -1px 1px 1px rgba(0,0,0,0.1);
+       
     }
     
 </style>

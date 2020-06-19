@@ -19,3 +19,9 @@ export class DetailInfos{
         this.realPrice = itemInfo.lowNowPrice
     }
 }
+// export class DetailShop{
+//     constructor(shopInfo){
+//         this.cFans = shopInfo.cFans;
+
+//     }
+// }

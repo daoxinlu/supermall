@@ -130,10 +130,12 @@ export default {
         font-size:14px;
     }
     .goods-item-price>span:nth-of-type(2){
-        font-size:30px;
+        font-size:16px;
+        margin:5px;
     }
+
     .goods-item-price>span:nth-of-type(3){
-        font-size:20px;
+        font-size:16px;
     }
     .goods-title-words{
         line-height:20px;   
