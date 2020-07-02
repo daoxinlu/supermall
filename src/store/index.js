@@ -4,26 +4,29 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const store =new Vuex.Store( {
-    state:{
+    state: {
         cartList:[]
     },
     mutations:{
         addCart(state,args){
             var cur = '';
+            console.log(state.cartList)
             if(state.cartList.some((item,index)=>{cur = index;return item.iid==args.iid})){
                 state.cartList[cur].count+=1;
                 console.log('some')
-            }else{
+            }
+            else{
                 var payload = JSON.parse(JSON.stringify(args))
                 payload.count=1;
                 state.cartList.push(payload)
-                
             }
-            localStorage.setItem('cartList',JSON.stringify(state.cartList))
+            
+            // localStorage.setItem('cart',JSON.stringify(state.cartList))
+            // console.log(localStorage.getItem('cart'))
+            
         },
         init(state,args){
             state.cartList = args
-            
         }
     }
 })

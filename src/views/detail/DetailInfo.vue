@@ -39,11 +39,11 @@ export default {
         }
     },
     created(){
-        console.log(this.id)
+        // console.log(this.id)
         getDetail(this.id).then(res=>{
             this.goods = new DetailInfos(res.data.result.itemInfo,res.data.result.columns,res.data.result.shopInfo.services)
             this.isEmpty = false
-            console.log(this.goods)
+            // console.log(this.goods)
         })
     },
 }

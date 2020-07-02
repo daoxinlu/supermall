@@ -35,10 +35,21 @@ export default {
       })
     }
   },
-  created(){
-    // console.log(localStorage.getItem('cartList'))
-    var payload = JSON.parse(localStorage.getItem('cartList'))
-    this.$store.commit('init',payload)
+  mounted(){
+    console.log(JSON.parse(localStorage.getItem('cart')))
+    var payload = JSON.parse(localStorage.getItem('cart'))
+    if(payload == null){
+      localStorage.setItem('cart','[]')
+      this.$store.commit('init',[])
+    }
+    else{
+      this.$store.commit('init',payload)
+    }
+         //启动项目后载入购物车数据
+  },
+  beforeDestroy(){
+    localStorage.setItem('cart',[])
+    console.log('a')
   }
   
 }

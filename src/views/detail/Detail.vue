@@ -72,8 +72,11 @@ export default {
             this.product.title = this.productInfo.itemInfo.title
             this.product.image = this.topImages[0]
             this.product.iid = this.iid
+            // console.log(this.product)
+            // var payload = JSON.parse(localStorage.getItem('cart'))
+            // console.log(payload)
+            // this.$store.commit('init',payload)      //启动项目后载入购物车数据
             
-            // console.log(this.$store.state.cartList)
             this.detailGoods = res.data.result.detailInfo;
         })
     },
@@ -87,6 +90,12 @@ export default {
                 tip.setAttribute('class','disvisible')
             },1200)
             this.product.img = this.goods 
+            var p = new Promise(
+                res=>{res(localStorage.setItem('cart',JSON.stringify(this.$store.state.cartList)))}
+            )
+            p.then(res=>{
+                console.log(localStorage.getItem('cart'))
+            })
         }
     }
     

@@ -120,7 +120,7 @@ export default {
     created(){
         getDetail(this.id).then(res=>{
             this.shopInfos = res.data.result.shopInfo;
-            console.log(this.shopInfos)
+            // console.log(this.shopInfos)
             
         })
     },
