@@ -14,6 +14,11 @@ module.exports = {
     },
     publicPath: process.env.NODE_ENV === "production" ? "/" : "/", //部署应用包时的基本 URL
     devServer:{
+        // headers:{
+        //     'Access-Control-Allow-Origin':'*'
+        // },
+        // hotOnly:false,
+        // disableHostCheck:true,
         port:8082
     }
 }

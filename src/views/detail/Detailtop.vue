@@ -2,8 +2,8 @@
   <top-bar class="detail-top">
         <div slot="left" @click="back"><i class="iconfont">&#xe608;</i></div>
         <div slot="center" class="detail-title">
-            <div class="detail-title-item" v-for="(item,index) in titles" @click="showIndex(index)"  :key="item">
-                <span :class="{active:currentIndex==index}">{{item}}</span>
+            <div class="detail-title-item" v-for="(item,index) in titles" @click="showIndex(index)" :key="item">
+                <span :class="{'active':currentIndex==index}">{{item}}</span>
             </div>
         </div>
         <div slot="right"></div>

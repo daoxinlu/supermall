@@ -18,7 +18,9 @@ const store =new Vuex.Store( {
             else{
                 var payload = JSON.parse(JSON.stringify(args))
                 payload.count=1;
+                payload.checkstate=true;
                 state.cartList.push(payload)
+                
             }
             
             // localStorage.setItem('cart',JSON.stringify(state.cartList))
@@ -27,6 +29,19 @@ const store =new Vuex.Store( {
         },
         init(state,args){
             state.cartList = args
+        },
+        select(state,payload){
+            
+            var index = state.cartList.findIndex((item)=>{return item.iid==payload.iid})
+            console.log(index)
+            state.cartList[index].checkstate = payload.checked
+            console.log(state.cartList)
+        },
+        selectAll(state,payload){
+            console.log(payload)
+            for(let item of state.cartList){
+                item.checkstate = payload.checked
+            }
         }
     }
 })

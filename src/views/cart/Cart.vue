@@ -5,6 +5,7 @@
     <div class="clear-cart" @click="clearCart">
       清空购物车
     </div>
+    <cart-settle></cart-settle>
   </div>
   
 </template>
@@ -12,11 +13,13 @@
 <script>
 import TopBar from 'components/common/Topbar'
 import CartList from './CartList'
+import CartSettle from './CartSettle'
 export default {
     name:'Cart',
     components:{
       CartList,
       TopBar,
+      CartSettle,
     },
     methods:{
       clearCart(){
