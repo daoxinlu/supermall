@@ -149,4 +149,5 @@ export default {
         box-shadow:0 -3px 2px 1px #eee;
         padding-top:20px;
     }
+    
 </style>

@@ -42,6 +42,21 @@ const store =new Vuex.Store( {
             for(let item of state.cartList){
                 item.checkstate = payload.checked
             }
+        },
+        addGood(state,iid){
+            var index = state.cartList.findIndex((item)=>{return item.iid==iid})
+            state.cartList[index].count++;
+
+        },
+        reduceGood(state,iid){
+            var index = state.cartList.findIndex((item)=>{return item.iid==iid})
+            if(state.cartList[index].count>1){
+                state.cartList[index].count--
+            }else{
+                if(confirm('该商品数量为0，是否删除此商品')){
+                    state.cartList.splice(index,1)
+                }
+            }
         }
     }
 })

@@ -5,7 +5,7 @@
     <div class="clear-cart" @click="clearCart">
       清空购物车
     </div>
-    <cart-settle></cart-settle>
+    <cart-settle class="cart-settle"></cart-settle>
   </div>
   
 </template>
@@ -42,6 +42,7 @@ export default {
   }
   #cart{
     width:100%;
+    padding-bottom:120px;
   }
   .cart{
     width:100%;
@@ -54,5 +55,12 @@ export default {
     background: green;
     padding:10px;
     border-radius:5px;
+  }
+  .cart-settle{
+    position:fixed;
+    bottom:49px;
+    background-color:#eee;
+    width:100%;
+    height:49px;
   }
 </style>

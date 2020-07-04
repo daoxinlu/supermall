@@ -32,6 +32,17 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    .settle{
+        display:flex;
+        /* justify-content: center; */
+        align-items: center;
+    }
+    .settle-btn{
+        height:30px;
+        flex:0 1 100px;
+        position: absolute;
+        
+        right:10px; 
+    }
 </style>

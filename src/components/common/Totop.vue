@@ -17,7 +17,7 @@ export default {
         background-color:#eee;
         /* opacity:0.8; */
         right:10px;
-        bottom:80px;
+        bottom:100px;
         z-index:1000;
         /* height:30px; */
         width:40px;
