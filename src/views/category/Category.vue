@@ -4,8 +4,9 @@
       <div slot="center">分类</div>
     </top-bar>
     <div id="cate-content">
-      <goods-cate class="cate-list"></goods-cate>
-      <div id="cate-content" @click="test">content</div>
+      <goods-cate class="cate-list" :catelist="catelist" v-if="catelist.length>0"></goods-cate>
+      <cate-content id="cate-content"></cate-content>
+      
     </div>
     
   </div>
@@ -18,24 +19,35 @@ import BScroll from 'better-scroll'
 //导入组件
 import TopBar from 'components/common/Topbar'
 import GoodsCate from 'components/common/Goodscate.vue'
+import CateContent from './CateContent'
+//导入接口
+import {CateGory} from '@/network/category'
 
 export default {
     name:'Category',
     components:{
       TopBar,
       GoodsCate,
-      
+      CateContent,
     },
     data(){
       return {
-        
+        catelist:[],
       }
+    },
+    created(){
+      CateGory().then(res=>{
+        this.catelist = res.data.data.category.list
+        
+      })
     },
     mounted(){
       // new BScroll('.cate-list',{
       //   scrollY:true,
       //   click:true
       // })
+
+
     },methods:{
       test(){
             var li = document.getElementById('li')
@@ -48,9 +60,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   #cate-content{
-    display:flex;
+    /* display:flex; */
   }
   .cate-top{
     width:100%;
@@ -62,12 +74,17 @@ export default {
     top:0;
     
   }
+  
   .cate-list{
-        height:570px;
-        background: seagreen;
-        overflow-y:scroll;
-        
-        width:30%;
-        padding-top:3px;
-    }
+    height:640px;
+    background: #eee;
+    overflow-y:scroll;
+    width:40%;
+    
+    float:left;
+  }
+  #cate-content{
+    
+    float:right
+  }
 </style>

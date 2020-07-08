@@ -117,10 +117,11 @@
        * 操作DOM, 在DOM前后添加Slide
        */
 		  handleDom: function () {
-        // 1.获取要操作的元素
+        this.$nextTick(()=>{
+          // 1.获取要操作的元素
         let swiperEl = document.querySelector('.swiper');
         let slidesEls = swiperEl.getElementsByClassName('slide');
-
+        
         // 2.保存个数
         this.slideCount = slidesEls.length;
 
@@ -136,6 +137,8 @@
 
         // 4.让swiper元素, 显示第一个(目前是显示前面添加的最后一个元素)
         this.setTransform(-this.totalWidth);
+        })
+        
       },
 
       /**
